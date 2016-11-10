@@ -22,9 +22,11 @@ console.log(process.env);
 app.set('port', process.env.PORT || 3000);
 if (process.env.VCAP_SERVICES) {
     var env = JSON.parse(process.env.VCAP_SERVICES);
-	if (env['Compose for MongoDB']) {
+    console.log(env);
+    console.log(env['compose-for-mongodb']);
+	if (env['compose-for-mongodb']) {
         hasConnect = true;
-		credentials = env['Compose for MongoDB'][0].credentials;
+		credentials = env['compose-for-mongodb'][0].credentials;
 		MONGODB_URL=credentials.uri;
 	}
 
