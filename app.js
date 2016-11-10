@@ -18,6 +18,7 @@ var hasConnect = false;
 var MONGODB_URL;
 var credentials;
 var app = express();
+console.log(process.env);
 app.set('port', process.env.PORT || 3000);
 if (process.env.VCAP_SERVICES) {
     var env = JSON.parse(process.env.VCAP_SERVICES);
