@@ -15,7 +15,7 @@
 
 var express = require('express');
 
-var PORT = 3030;
+var PORT = 80;
 
 var app = express();
 var MONGODB_URL="mongodb://admin:BBLQHNSQZFUGCNZI@bluemix-sandbox-dal-9-portal.3.dblayer.com:17723/admin?ssl=true"
