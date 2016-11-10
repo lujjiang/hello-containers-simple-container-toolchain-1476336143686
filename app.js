@@ -15,11 +15,35 @@
 
 var express = require('express');
 
-var PORT = 80;
+var PORT = 3030;
 
 var app = express();
+var MONGODB_URL="mongodb://admin:BBLQHNSQZFUGCNZI@bluemix-sandbox-dal-9-portal.3.dblayer.com:17723/admin?ssl=true"
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+
+var options = {
+    mongos: {
+        ssl: true,
+        sslValidate: false,
+    }
+}
+
+
 app.get('/', function (req, res) {
-  res.send('Welcome to Bluemix DevOps with Docker. Lets go use Pipeline Services');
+	MongoClient.connect(MONGODB_URL, options, function(err, db) {
+	    assert.equal(null, err);
+	    db.listCollections({}).toArray(function(err, collections) {
+	        assert.equal(null, err);
+	        collections.forEach(function(collection) {
+	            console.log(collection);
+	        });
+	        db.close();
+	        res.send(collections);
+	        // process.exit(0);
+	    })
+	});
+  	
 });
 
 app.listen(PORT)

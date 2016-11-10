@@ -5,12 +5,14 @@
   "description": "Basic hello world application for Node.js",
   "author": "Robbie Minshall <rjminsha@us.ibm.com>",
   "dependencies": {
+    "assert": "^1.4.1",
     "express": "3.4.8",
+    "jquery": "*",
     "mocha": "*",
+    "mongodb": "^2.2.11",
+    "nconf": "*",
+    "request-json": "*",
     "should": "*",
-    "nconf":  "*",
-    "validator": "*",
-    "jquery":"*",
-    "request-json":"*"
+    "validator": "*"
   }
 }
