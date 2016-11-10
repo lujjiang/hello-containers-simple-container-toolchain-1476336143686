@@ -15,10 +15,22 @@
 
 var express = require('express');
 
-var PORT = 80;
-
+var MONGODB_URL;
 var app = express();
-var MONGODB_URL="mongodb://admin:BBLQHNSQZFUGCNZI@bluemix-sandbox-dal-9-portal.3.dblayer.com:17723/admin?ssl=true"
+app.set('port', process.env.PORT || 80);
+if (process.env.VCAP_SERVICES) {
+    var env = JSON.parse(process.env.VCAP_SERVICES);
+	if (env['Compose for MongoDB']) {
+        hasConnect = true;
+		credentials = env['Compose for MongoDB'][0].credentials;
+		MONGODB_URL=credentials.uri;
+	}
+
+}
+if ( hasConnect == false ) {
+
+   MONGODB_URL=credentials?credentials.uri:"mongodb://admin:BBLQHNSQZFUGCNZI@bluemix-sandbox-dal-9-portal.3.dblayer.com:17723/admin?ssl=true"
+}
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
@@ -46,5 +58,5 @@ app.get('/', function (req, res) {
   	
 });
 
-app.listen(PORT)
-console.log(' Application Running on port' + PORT);
+app.listen(app.get('port'));
+console.log(' Application Running on port' + app.get('port'));
