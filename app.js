@@ -14,10 +14,11 @@
 **/
 
 var express = require('express');
-
+var hasConnect = false;
 var MONGODB_URL;
+var credentials;
 var app = express();
-app.set('port', process.env.PORT || 80);
+app.set('port', process.env.PORT || 3000);
 if (process.env.VCAP_SERVICES) {
     var env = JSON.parse(process.env.VCAP_SERVICES);
 	if (env['Compose for MongoDB']) {
@@ -29,8 +30,10 @@ if (process.env.VCAP_SERVICES) {
 }
 if ( hasConnect == false ) {
 
-   MONGODB_URL=credentials?credentials.uri:"mongodb://admin:BBLQHNSQZFUGCNZI@bluemix-sandbox-dal-9-portal.3.dblayer.com:17723/admin?ssl=true"
+   MONGODB_URL="mongodb://admin:BBLQHNSQZFUGCNZI@bluemix-sandbox-dal-9-portal.3.dblayer.com:17723/admin?ssl=true"
 }
+console.log(credentials);
+console.log(MONGODB_URL);
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
